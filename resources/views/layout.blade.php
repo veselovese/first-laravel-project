@@ -2,7 +2,7 @@
 <html lang="ru">
 
 <head>
-    <title>Title</title>
+    <title>Веселов 231-322</title>
     <meta charset="utf-8" />
     <meta
         name="viewport"
@@ -19,7 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="">Navbar</a>
+                <a class="navbar-brand" href="/">Navbar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,17 +45,15 @@
                             </ul>
                         </li> -->
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Искать.." aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Поиск</button>
-                    </form>
+                    <a class="btn btn-outline-success" href="/auth/signup">Зарегистрироваться</a>
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        <h1>Привет, (мир) это мой сайт!</h1>
-        @yield('content')
+        <div class="container mt-3">
+            @yield('content')
+        </div>
     </main>
     <footer>
     </footer>

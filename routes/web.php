@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('layout');
+Route::get('/', [MainController::class, 'index']);
+
+Route::get('/galery/{img}/{name}', function($img, $name) {
+    return view('main.galery', ['img' => $img, 'name' => $name]);
+});
+
+Route::get('/auth/signup', [AuthController::class, 'signup']);
+
+Route::post('/auth/registr', function () {
+    return view('auth.registr');
 });
 
 Route::get('/about', function () {
