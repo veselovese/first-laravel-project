@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/registr', function () {
     return view('auth.registr');
 });
+
+Route::resource('articles', ArticleController::class);
 
 Route::get('/about', function () {
     return view('main.about');
