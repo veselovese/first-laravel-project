@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/articles">Статьи</a>
+                            <a class="nav-link active" aria-current="page" href="/article">Статьи</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/about">О нас</a>
