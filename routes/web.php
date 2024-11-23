@@ -29,13 +29,16 @@ Route::get('/galery/{img}/{name}', function ($img, $name) {
 
 Route::get('/auth/signup', [AuthController::class, 'signup']);
 Route::post('/auth/registr', [AuthController::class, 'registr']);
+Route::get('/auth/signin', [AuthController::class, 'signin'])->name('login');
+Route::post('/auth/authenticate', [AuthController::class, 'authenticate']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::resource('article', ArticleController::class);
 
 Route::post('/comment', [CommentController::class, 'store']);
 Route::get('/comment/{id}/edit', [CommentController::class, 'edit']);
 Route::post('/comment/{comment}/update', [CommentController::class, 'update']);
-Route::get('/comment/{id}/delete', [CommentController::class, 'delete']);
+Route::get('/comment/{comment}/delete', [CommentController::class, 'destroy']);
 
 Route::get('/about', function () {
     return view('main.about');

@@ -29,6 +29,9 @@
                             <a class="nav-link active" aria-current="page" href="/article">Статьи</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/article/create">Создать статью</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/about">О нас</a>
                         </li>
                         <li class="nav-item">
@@ -48,7 +51,9 @@
                             </ul>
                         </li> -->
                     </ul>
-                    <a class="btn btn-outline-success" href="/auth/signup">Зарегистрироваться</a>
+                    <a class="btn btn-outline-success me-1  " href="/auth/signin">Войти</a>
+                    <a class="btn btn-outline-success me-1" href="/auth/signup">Зарегистрироваться</a>
+                    <a class="btn btn-outline-success" href="/auth/logout">Выйти</a>
                 </div>
             </div>
         </nav>

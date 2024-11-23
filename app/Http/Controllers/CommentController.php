@@ -10,16 +10,22 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3',
+            'name' => 'required|min:4',
             'desc' => 'required|max:256'
         ]);
+
         $comment = new Comment;
         $comment->name = request('name');
         $comment->desc = request('desc');
+        // $comment->desc = $request->desc;
         $comment->article_id = request('article_id');
         $comment->user_id = 1;
-        $comment->save();
-        return redirect()->back();
+
+        if ($comment->save()) {
+            return redirect()->back()->with('status', 'Ваш комментарий добавлен');
+        } else {
+            return redirect()->back()->with('status', 'Ошибка добавления комментария');
+        }
     }
 
     public function edit($id)
@@ -31,19 +37,26 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $request->validate([
-            'name' => 'required|min:3',
+            'name' => 'required|min:4',
             'desc' => 'required|max:256'
         ]);
+
         $comment->name = request('name');
         $comment->desc = request('desc');
-        $comment->save();
-        return redirect()->route('article.show', ['article' => $comment->article_id]);
+
+        if ($comment->save()) {
+            return redirect()->route('article.show', ['article' => $comment->article_id])->with('status', 'Ваш комментарий изменен');
+        } else {
+            return redirect()->back()->with('status', 'Ошибка изменения комментария');
+        }
     }
 
-    public function delete($id)
+    public function destroy(Comment $comment)
     {
-        $comment = Comment::findOrFail($id);
-        $comment->delete();
-        return redirect()->route('article.show', ['article' => $comment->article_id])->with('status', 'Delete success');
+        if ($comment->delete()) {
+            return redirect()->route('article.show', ['article' => $comment->article_id])->with('status', 'Ваш комментарий удален');
+        } else {
+            return redirect()->route('article.show', ['article' => $comment->article_id])->with('status', 'Ошибка удаления комментария');
+        }
     }
 }
