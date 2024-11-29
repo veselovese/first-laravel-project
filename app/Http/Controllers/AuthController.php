@@ -7,8 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Routing\RedirectController;
-use Illuminate\Routing\Redirector;
 
 class AuthController extends Controller
 {
@@ -31,13 +29,6 @@ class AuthController extends Controller
             'email' => 'required|unique:App\Models\User|email',
             'password' => 'required|min:6'
         ]);
-
-        // $response = [
-        //     'name' => request('name'),
-        //     'email' => request('email'),
-        // ];
-
-        // return response()->json($response);
 
         $user = User::create([
             'name' => request('name'),

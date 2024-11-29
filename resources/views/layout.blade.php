@@ -51,9 +51,13 @@
                             </ul>
                         </li> -->
                     </ul>
+                    @guest
                     <a class="btn btn-outline-success me-1  " href="/auth/signin">Войти</a>
                     <a class="btn btn-outline-success me-1" href="/auth/signup">Зарегистрироваться</a>
+                    @endguest
+                    @auth
                     <a class="btn btn-outline-success" href="/auth/logout">Выйти</a>
+                    @endauth
                 </div>
             </div>
         </nav>
