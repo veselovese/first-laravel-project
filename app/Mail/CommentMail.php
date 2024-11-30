@@ -20,8 +20,9 @@ class CommentMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Comment $comment, public $article) {
-        $this->article = Article::findOrFail($article);
+    public $article;
+    public function __construct(public Comment $comment) {
+        $this->article = Article::findOrFail($comment->article_id);
     }
 
     /**

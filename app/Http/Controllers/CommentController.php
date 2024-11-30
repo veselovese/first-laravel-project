@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\VeryLongJob;
 use App\Models\Comment;
 use App\Mail\CommentMail;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
 
         if ($comment->save()) {
-            Mail::to('motte_vessale@mail.ru')->send(new CommentMail($comment, $comment->article_id));
+            VeryLongJob::dispatch($comment);
             return redirect()->back()->with('status', 'Ваш комментарий отправлен на модерацию');
         } else {
             return redirect()->back()->with('status', 'Ошибка добавления комментария');
