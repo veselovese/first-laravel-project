@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Mail\CommentMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
+    public function index() 
+    {
+        $comments = Comment::latest()->paginate(8);
+        return view('comment.index', ['comments' => $comments]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -24,7 +32,8 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
 
         if ($comment->save()) {
-            return redirect()->back()->with('status', 'Ваш комментарий добавлен');
+            Mail::to('motte_vessale@mail.ru')->send(new CommentMail($comment, $comment->article_id));
+            return redirect()->back()->with('status', 'Ваш комментарий отправлен на модерацию');
         } else {
             return redirect()->back()->with('status', 'Ошибка добавления комментария');
         }
@@ -63,5 +72,19 @@ class CommentController extends Controller
         } else {
             return redirect()->route('article.show', ['article' => $comment->article_id])->with('status', 'Ошибка удаления комментария');
         }
+    }
+
+    public function accept(Comment $comment) 
+    {
+        $comment->accept = true;
+        $comment->save();
+        return redirect()->route('comment.index');
+    }
+
+    public function reject(Comment $comment) 
+    {
+        $comment->accept = false;
+        $comment->save();
+        return redirect()->route('comment.index');
     }
 }
