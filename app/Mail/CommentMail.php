@@ -32,7 +32,7 @@ class CommentMail extends Mailable
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
-            subject: 'Comment Mail',
+            subject: 'Новый комментарий у статьи',
         );
     }
 

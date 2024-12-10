@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewArticleEvent;
 use App\Models\Article;
 use App\Models\User;
 use App\Models\Comment;
@@ -43,8 +44,10 @@ class ArticleController extends Controller
         $article->name = $request->name;
         $article->desc = $request->desc;
         $article->user_id = 1;
-        $article->save();
-        return redirect('/article');
+        if ($article->save()) {
+            NewArticleEvent::dispatch($article);
+            return redirect('/article');
+        }
     }
 
     /**
@@ -83,7 +86,7 @@ class ArticleController extends Controller
         if ($article->save()) return redirect('/article')->with('status', 'Update success');
         else return redirect()->route('article.index')->with('status', 'Update don`t success');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */

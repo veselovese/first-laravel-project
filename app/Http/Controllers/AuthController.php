@@ -55,7 +55,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/article');
         } else {
-            back()->withErrors(([
+            return back()->withErrors(([
                 'email' => 'Ошибка входа в аккаунт'
             ]))->onlyInput('email');
         }
